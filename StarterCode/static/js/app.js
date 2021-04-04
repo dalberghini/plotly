@@ -27,12 +27,12 @@ function buildPlot(sample_id) {
             type: "bar",
             orientation : "h" }];
         var layout1 = {
-            title: "Something of a title",
+            title: `Top ${sample_values.length} Bacteria Found in Bellybutton of Patient #${sample_id}.`,
             xaxis: {
-                title : "Concentration of Something"
+                title : "Sample Values"
             },
             yaxis: {
-                title: "ID Numbers of Bacteria"
+                title: "Bacteria ID"
             }
         };
         Plotly.newPlot("bar", trace1, layout1);
@@ -48,7 +48,13 @@ function buildPlot(sample_id) {
             text : otu_labels
         }];
         var layout2 = {
-            title : "Bubbles",
+            title : `Top ${sample_values.length} Bacteria Found in Bellybutton of Patient #${sample_id}.`,
+            xaxis : {
+                title: "Bacteria ID"
+            },
+            yaxis : {
+                title: "Sample Values"
+            }
         };
         Plotly.newPlot("bubble", trace2, layout2);
         var metadata = data.metadata.filter(x=> x.id == sample_id)[0];
