@@ -1,4 +1,5 @@
-
+handle_list();
+d3.select("body").on("change", handle_list);
 function handle_list() {
     d3.json("../samples.json").then(function(data) {
         var dropDownMenu = d3.select("#selDataset");
@@ -12,7 +13,6 @@ function buildPlot(sample_id) {
     d3.json("../samples.json").then(function(data){
         var samples_list = data.samples.filter(x=> x.id == sample_id);
         // console.log(samples_list);
-        var id_number = samples_list[0].id.slice(0,10);
         var sample_values = samples_list[0].sample_values.slice(0,10);
         var otu_ids = samples_list[0].otu_ids.slice(0,10);
         var otu_labels = samples_list[0].otu_labels.slice(0,10);
@@ -40,6 +40,7 @@ function buildPlot(sample_id) {
             type : "scatter", 
             x : otu_ids,
             y : sample_values,
+            mode: "markers",
             marker : {
                 size : sample_values,
                 color: otu_ids
@@ -50,12 +51,11 @@ function buildPlot(sample_id) {
             title : "Bubbles",
         };
         Plotly.newPlot("bubble", trace2, layout2);
-
         var metadata = data.metadata.filter(x=> x.id == sample_id)[0];
         var div = d3.select("#sample-metadata");
         div.append("tbody");
         var tbody = d3.select("tbody");
-        tbody.html = "";
+        tbody.html("");
         Object.entries(metadata).forEach(([key, value])=> {
             var row = tbody.append("tr");
             var cell = row.append("td");
