@@ -13,16 +13,16 @@ function buildPlot(sample_id) {
     d3.json("../samples.json").then(function(data){
         var samples_list = data.samples.filter(x=> x.id == sample_id);
         // console.log(samples_list);
-        var sample_values = samples_list[0].sample_values.slice(0,10);
-        var otu_ids = samples_list[0].otu_ids.slice(0,10);
-        var otu_labels = samples_list[0].otu_labels.slice(0,10);
+        var sample_values = samples_list[0].sample_values.slice(0,10).reverse();
+        var otu_ids = samples_list[0].otu_ids.slice(0,10).reverse();
+        var otu_labels = samples_list[0].otu_labels.slice(0,10).reverse();
         // console.log(id_number);
         // console.log(sample_values);
         // console.log(otu_ids);
         //  console.log(otu_labels);
         var trace1 = [{
             x : sample_values,
-            y: otu_ids,
+            labels: otu_ids,
             text : otu_labels,
             type: "bar",
             orientation : "h" }];
