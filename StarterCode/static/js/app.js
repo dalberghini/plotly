@@ -13,21 +13,25 @@ function buildPlot(sample_id) {
     d3.json("../samples.json").then(function(data){
         var samples_list = data.samples.filter(x=> x.id == sample_id);
         // console.log(samples_list);
-        var sample_values = samples_list[0].sample_values.slice(0,10).reverse();
-        var otu_ids = samples_list[0].otu_ids.slice(0,10).reverse();
-        var otu_labels = samples_list[0].otu_labels.slice(0,10).reverse();
+        var sample_values = samples_list[0].sample_values;
+        var sliced_sample_values = samples_list[0].sample_values.slice(0,10).reverse();
+        var otu_ids = samples_list[0].otu_ids;
+        var sliced_otu_ids = samples_list[0].otu_ids.slice(0,10).reverse();
+        var otu_labels = samples_list[0].otu_labels;
+        var sliced_otu_labels = samples_list[0].otu_labels.slice(0,10).reverse();
         // console.log(id_number);
         // console.log(sample_values);
         // console.log(otu_ids);
-        //  console.log(otu_labels);
+        //  console.log(otu_labels)
+        var labels = sliced_otu_ids.map(x=> `OTU ${x}`)
         var trace1 = [{
-            x : sample_values,
-            labels: otu_ids,
-            text : otu_labels,
+            x : sliced_sample_values,
+            y: labels,
+            text : sliced_otu_labels,
             type: "bar",
             orientation : "h" }];
         var layout1 = {
-            title: `Top ${sample_values.length} Bacteria Found in Bellybutton of Patient #${sample_id}.`,
+            title: `Top ${sliced_sample_values.length} Bacteria Found in Bellybutton of Patient #${sample_id}.`,
             xaxis: {
                 title : "Sample Values"
             },
