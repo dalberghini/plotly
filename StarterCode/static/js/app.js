@@ -50,6 +50,17 @@ function buildPlot(sample_id) {
             title : "Bubbles",
         };
         Plotly.newPlot("bubble", trace2, layout2);
+
+        var metadata = data.metadata.filter(x=> x.id == sample_id)[0];
+        var div = d3.select("#sample-metadata");
+        div.append("tbody");
+        var tbody = d3.select("tbody");
+        tbody.html = "";
+        Object.entries(metadata).forEach(([key, value])=> {
+            var row = tbody.append("tr");
+            var cell = row.append("td");
+            cell.text(`${key} : ${value}`);
+        });
     });
 }
 buildPlot(940);
