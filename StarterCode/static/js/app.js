@@ -1,7 +1,7 @@
 handle_list();
 d3.select("body").on("change", handle_list);
 function handle_list() {
-    d3.json("../samples.json").then(function(data) {
+    d3.json("https://raw.githubusercontent.com/dalberghini/plotly/main/samples.json").then(function(data) {
         var dropDownMenu = d3.select("#selDataset");
         data.names.forEach((name) => {
             dropDownMenu.append("option").text(name).property("value", name);
@@ -10,7 +10,7 @@ function handle_list() {
 }
 handle_list();
 function buildPlot(sample_id) {
-    d3.json("../samples.json").then(function(data){
+    d3.json("https://raw.githubusercontent.com/dalberghini/plotly/main/samples.json").then(function(data){
         var samples_list = data.samples.filter(x=> x.id == sample_id);
         // console.log(samples_list);
         var sample_values = samples_list[0].sample_values;
