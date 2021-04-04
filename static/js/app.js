@@ -1,3 +1,7 @@
+d3.json("https://raw.githubusercontent.com/dalberghini/plotly/main/samples.json").then((samples)=> {
+  console.log(samples)
+});
+
 handle_list();
 d3.select("body").on("change", handle_list);
 function handle_list() {
